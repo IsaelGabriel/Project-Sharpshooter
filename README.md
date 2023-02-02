@@ -1,6 +1,6 @@
 # SHARPSHOOTER
 
-## The project
+## Introduction
 
   This is the repository for Project Sharpshooter, a simple FPS game I am making for my portfolio and to develop my game development skills, such as Game Design, Level Design and programming.
 
@@ -17,3 +17,7 @@
   
   - [GitHub](https://github.com/IsaelGabriel)
   - [LinkedIn](https://www.linkedin.com/in/isael-gabriel/?locale=en_US)
+
+## The project
+
+  Project Sharpshooter is a parkour FPS game with a focus on speedrunning, which means the goal here is to hit the targets and reach the level finish line as quick as possible.
