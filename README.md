@@ -1,1 +1,19 @@
-# Project-Sharpshooter
+# SHARPSHOOTER
+
+## The project
+
+  This is the repository for Project Sharpshooter, a simple FPS game I am making for my portfolio and to develop my game development skills, such as Game Design, Level Design and programming.
+
+  - *Game Engine:* Unity;
+  - *Programming Language:* C#;
+  - *Assets:*
+    - [Gridbox Prototype Materials](https://assetstore.unity.com/packages/2d/textures-materials/gridbox-prototype-materials-129127) by [Ciathyza](https://www.ciathyza.com/).
+
+## The developer
+
+  I am *IsaelGabriel*, a Games Development student from Brazil.
+  
+  You can find me on:
+  
+  - [GitHub](https://github.com/IsaelGabriel)
+  - [LinkedIn](https://www.linkedin.com/in/isael-gabriel/?locale=en_US)
