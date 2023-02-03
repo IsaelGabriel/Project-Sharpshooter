@@ -13,9 +13,9 @@ public class PlayerBehaviour : MonoBehaviour
 
 
     //Movement
-    public float moveSpeed = 10f;
-    public float jumpPower = 200f;
-    private bool grounded = true;
+    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float jumpPower = 200f;
+    [HideInInspector] public bool grounded = true;
     private float moveMult = 1f;
 
     //Shooting
@@ -48,7 +48,7 @@ public class PlayerBehaviour : MonoBehaviour
         if(grounded && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(transform.up * jumpPower);
-            grounded = false;
+            //grounded = false;
         }
     }
 
@@ -69,12 +69,12 @@ public class PlayerBehaviour : MonoBehaviour
             newBullet.transform.rotation = bulletSpawn.rotation;
         }
     }
-
+/*
     void OnCollisionEnter(Collision c)
     {
         if(c.gameObject.name == "Ground")
         {
             grounded = true;
         }
-    }
+    }*/
 }
