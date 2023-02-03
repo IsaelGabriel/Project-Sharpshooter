@@ -11,8 +11,6 @@
 
 ## The developer
 
-  I am *IsaelGabriel*, a Games Development student from Brazil.
-  
   You can find me on:
   
   - [GitHub](https://github.com/IsaelGabriel)
