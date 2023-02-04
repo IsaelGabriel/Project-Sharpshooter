@@ -4,43 +4,40 @@ using UnityEngine;
 
 public class PlayerBehaviour : SignalHandler
 {
-
-    public float mouseSensitivity = 70f;
-
+    
+    /// Player view
     public Transform head;
     private float headAngle = 0f;
-    private Rigidbody rb;
 
 
-    //Movement
+    /// Movement
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float jumpPower = 200f;
     [HideInInspector] public bool grounded = true;
-    private float moveMult = 1f;
+    private Rigidbody rb;
 
-    //Shooting
-    public Transform bulletSpawn;
+    /// Shooting
+    public Transform bulletSpawn; /// Bullet Spawnpoint
     public GameObject bulletPrefab;
-
-
-    // Start is called before the first frame update
+ 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Cursor.visible) return;
+        if(Time.timeScale <= 0f) return;
         Move();
         ManageCamera();
         Shoot();
     }
 
+    /// Handle all player movement.
     void Move()
     {
-        moveMult = (Input.GetAxis("Horizontal") != 0f && Input.GetAxis("Vertical") != 0f)? 0.7f : 1f;
+        float moveMult = (Input.GetAxis("Horizontal") != 0f && Input.GetAxis("Vertical") != 0f)? 0.7f : 1f; /// Makes sure diagonal movement doesn't give an advantage to the player.
 
         transform.position += transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime * moveMult;
         transform.position += transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime * moveMult;
@@ -49,15 +46,16 @@ public class PlayerBehaviour : SignalHandler
         if(grounded && Input.GetButtonDown("Jump"))
         {
             rb.AddForce(transform.up * jumpPower);
-            //grounded = false;
+            SendSignal("PlayerJump");
         }
     }
 
+    /// Handles player view using mouse input.
     void ManageCamera()
     {
-        transform.Rotate(new Vector3(0f,Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime, 0f));
-        headAngle += (Input.GetAxis("Mouse Y") * -mouseSensitivity * Time.deltaTime);
-        headAngle = Mathf.Clamp(headAngle,-90f,80f);
+        transform.Rotate(new Vector3(0f,Input.GetAxis("Mouse X") * GameManager.mouseSensitivity * Time.deltaTime, 0f));
+        headAngle += (Input.GetAxis("Mouse Y") * -GameManager.mouseSensitivity * Time.deltaTime);
+        headAngle = Mathf.Clamp(headAngle,-90f,80f); /// Limits player view's x rotation.
         head.eulerAngles = new Vector3(headAngle, head.eulerAngles.y,head.eulerAngles.z);
     }
 
@@ -80,13 +78,4 @@ public class PlayerBehaviour : SignalHandler
         }
     }
 
-
-/*
-    void OnCollisionEnter(Collision c)
-    {
-        if(c.gameObject.name == "Ground")
-        {
-            grounded = true;
-        }
-    }*/
 }
