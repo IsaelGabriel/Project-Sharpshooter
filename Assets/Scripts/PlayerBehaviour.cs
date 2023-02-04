@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : SignalHandler
 {
 
     public float mouseSensitivity = 70f;
@@ -32,6 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Cursor.visible) return;
         Move();
         ManageCamera();
         Shoot();
@@ -69,6 +70,17 @@ public class PlayerBehaviour : MonoBehaviour
             newBullet.transform.rotation = bulletSpawn.rotation;
         }
     }
+
+    protected override void ReceiveSignal(string signal)
+    {
+        if(signal.Contains("PlayerGrounded"))
+        {
+            grounded = (!signal.Contains("!"));
+            return;
+        }
+    }
+
+
 /*
     void OnCollisionEnter(Collision c)
     {

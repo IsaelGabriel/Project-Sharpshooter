@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : SignalHandler
 {
     public float velocity = 60f;
    
@@ -18,10 +18,15 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
+        SendSignal("BulletHit");
+
         if(c.gameObject.tag == "Target")
         {
+            SendSignal("TargetHit");
+
             Destroy(c.gameObject);
         }
+        
         Destroy(gameObject);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SignalHandler
 {
     public static GameManager Instance;
     
@@ -20,18 +20,10 @@ public class GameManager : MonoBehaviour
         GameManager.SetMouseFocusMode(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetButtonDown("Cancel")) GameManager.SetMouseFocusMode(false);
-        if(Input.GetButtonDown("Submit")) GameManager.SetMouseFocusMode(true);
-    }
-
     public static void SetMouseFocusMode(bool focus)
     {
         if(Cursor.visible != focus) return;
         Cursor.lockState = (focus)? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !focus;
-        Debug.Log((focus)? "Focus" : "Unfocus");
     }
 }

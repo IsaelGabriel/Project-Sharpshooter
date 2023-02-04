@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundCheck : MonoBehaviour
+public class GroundCheck : SignalHandler
 {
-    [SerializeField] private PlayerBehaviour player;
-
     void OnTriggerEnter(Collider c)
     {
-        if(c.tag == "Ground") player.grounded = true;
+        if(c.tag == "Ground") SendSignal("PlayerGrounded");
     } 
 
     void OnTriggerExit(Collider c)
     {
-        if(c.tag == "Ground") player.grounded = false;
+        if(c.tag == "Ground") SendSignal("!PlayerGrounded");
     }
 }
