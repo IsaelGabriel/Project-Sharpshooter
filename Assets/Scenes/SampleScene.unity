@@ -1224,9 +1224,10 @@ MonoBehaviour:
   head: {fileID: 1002496686}
   moveSpeed: 10
   jumpPower: 225
-  grounded: 1
+  rb: {fileID: 1214082709}
   bulletSpawn: {fileID: 268243150}
   bulletPrefab: {fileID: 6879166038124649928, guid: b32a8dd67445ce14ba00454121240b09, type: 3}
+  bulletCooldown: 0.25
 --- !u!1001 &1317154482
 PrefabInstance:
   m_ObjectHideFlags: 0

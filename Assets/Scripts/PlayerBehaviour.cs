@@ -13,17 +13,14 @@ public class PlayerBehaviour : SignalHandler
     /// Movement
     [SerializeField] private float moveSpeed = 10f;
     [SerializeField] private float jumpPower = 200f;
-    [HideInInspector] public bool grounded = true;
-    private Rigidbody rb;
+    private bool grounded = true;
+    [SerializeField] private Rigidbody rb;
 
     /// Shooting
-    public Transform bulletSpawn; /// Bullet Spawnpoint
-    public GameObject bulletPrefab;
- 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    [SerializeField] private Transform bulletSpawn; /// Bullet Spawnpoint
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletCooldown = 0.75f;
+    private float bulletCooldownCount = 0f;
 
     void Update()
     {
@@ -61,11 +58,18 @@ public class PlayerBehaviour : SignalHandler
 
     void Shoot()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(bulletCooldownCount > 0f)
+        {
+            bulletCooldownCount -= Time.deltaTime;
+            return;
+        }
+
+        if(Input.GetButton("Fire1"))
         {
             var newBullet = Instantiate(bulletPrefab);
             newBullet.transform.position = bulletSpawn.position;
             newBullet.transform.rotation = bulletSpawn.rotation;
+            bulletCooldownCount = bulletCooldown;
         }
     }
 
