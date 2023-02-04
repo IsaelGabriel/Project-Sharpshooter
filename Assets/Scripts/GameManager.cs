@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : SignalHandler
 {
     public static GameManager Instance; /// Static GameManager Instace can be referenced by any object, which makes it easier to find.
-    public static float mouseSensitivity = 70f;
+    public static float mouseSensitivity = 700f;
 
     void Awake()
     {
