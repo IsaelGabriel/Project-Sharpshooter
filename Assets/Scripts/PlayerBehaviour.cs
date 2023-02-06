@@ -11,8 +11,9 @@ public class PlayerBehaviour : SignalHandler
 
 
     /// Movement
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 500f;
     [SerializeField] private float jumpPower = 200f;
+    private bool running = true;
     private bool grounded = true;
     [SerializeField] private Rigidbody rb;
 
@@ -34,11 +35,14 @@ public class PlayerBehaviour : SignalHandler
     /// Handle all player movement.
     void Move()
     {
+        running = (!Input.GetButton("Walk"));
         float moveMult = (Input.GetAxis("Horizontal") != 0f && Input.GetAxis("Vertical") != 0f)? 0.7f : 1f; /// Makes sure diagonal movement doesn't give an advantage to the player.
-
-        transform.position += transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime * moveMult;
-        transform.position += transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime * moveMult;
-        
+        moveMult *= (running)? 1.5f : 1f;
+        moveMult *= (grounded)? 1f : 0.65f;
+        /*transform.position += transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime * moveMult;
+        transform.position += transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime * moveMult;*/
+        rb.AddForce(transform.right * Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime * moveMult);
+        rb.AddForce(transform.forward * Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime * moveMult);
        
         if(grounded && Input.GetButtonDown("Jump"))
         {
